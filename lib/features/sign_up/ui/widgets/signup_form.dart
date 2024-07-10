@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/core/theming/colors.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/core/widgets/app_text_form_field.dart';
 import 'package:quickmart/features/sign_up/data/cubit/signup_cubit.dart';
@@ -125,8 +126,8 @@ class _SignupFormState extends State<SignupForm> {
           SizedBox(
             height: 32.h,
           ),
-          state is SignupCubit
-              ? Center(child: CircularProgressIndicator())
+          state is SignUpLoading
+              ? Center(child: CircularProgressIndicator(color: ColorsManager.Black,))
               : AppTextButton(
             buttonText: 'Create Account',
             textStyle: TextStyles.font12WhiteBold,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/core/theming/colors.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/core/widgets/app_text_form_field.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
@@ -110,7 +111,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 height: 24.h,
               ),
               state is SignInLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(child: CircularProgressIndicator(color: ColorsManager.Black,))
                   : AppTextButton(
                 buttonText: 'Login',
                 textStyle: TextStyles.font12WhiteBold,
