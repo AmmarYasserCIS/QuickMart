@@ -1,11 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
 import 'package:quickmart/features/login/ui/widgets/Terms_Text.dart';
 import 'package:quickmart/features/login/ui/widgets/email_and_password_formfield.dart';
+import 'package:quickmart/features/sign_up/data/cubit/signup_cubit.dart';
+import 'package:quickmart/features/sign_up/ui/signup_screen.dart';
 
 import '../../../core/theming/Styles.dart';
 
@@ -18,7 +22,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
 
 
   @override
@@ -45,7 +48,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text('Don’t have an account?',
                         style: TextStyles.font14GrayRegular,),
-                      Text('Signup', style: TextStyles.font13CyanRegular,),
+                      InkWell(onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>
+                              BlocProvider(
+                                create: (context) => SignupCubit(DioConsumer(dio: Dio())),
+                                child: SignUpScreen(),
+                              )),
+                        );
+                      },
+                          child: Text(
+                            'Signup', style: TextStyles.font13CyanRegular,)),
                     ],
                   ),
                   SizedBox(height: 32.h,),
@@ -61,8 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
     }
-
-
   }
 
 }

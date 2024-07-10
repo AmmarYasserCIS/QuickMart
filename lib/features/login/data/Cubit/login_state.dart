@@ -5,8 +5,6 @@ part of 'login_cubit.dart';
 
 class LoginInitial extends LoginState {}
 class SignInSuccess extends LoginState {
-  final String SucessMessage;
-  SignInSuccess({required this.SucessMessage});
 }
 class SignInLoading extends LoginState {}
 class SignInFalure extends LoginState {

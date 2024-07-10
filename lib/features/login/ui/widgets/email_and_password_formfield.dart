@@ -24,7 +24,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         if (state is SignInSuccess) {
 
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.SucessMessage)));
+              .showSnackBar(SnackBar(content: Text('success')));
         } else if (state is SignInFalure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errorMessage)));
