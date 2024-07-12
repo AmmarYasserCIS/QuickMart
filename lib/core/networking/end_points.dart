@@ -18,4 +18,5 @@ class ApiKey {
   static String confirmPassword = "confirmPassword";
   static String location = "location";
   static String profilePic = "profilePic";
+  static String image = "image";
 }

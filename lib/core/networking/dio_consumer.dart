@@ -21,7 +21,7 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  Future delete(
+  Future<Response> delete(
       String path, {
         dynamic data,
         Map<String, dynamic>? queryParameters,
@@ -33,14 +33,15 @@ class DioConsumer extends ApiConsumer {
         data: isFromData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      return response.data;
-    } on DioException catch (e) {
+      return response;
+    } on DioError catch (e) {
       handleDioExceptions(e);
+      rethrow;
     }
   }
 
   @override
-  Future get(String path,
+  Future<Response> get(String path,
       {Object? data, Map<String, dynamic>? queryParameters}) async {
     try {
       final response = await dio.get(
@@ -48,14 +49,15 @@ class DioConsumer extends ApiConsumer {
         data: data,
         queryParameters: queryParameters,
       );
-      return response.data;
-    } on DioException catch (e) {
+      return response;
+    } on DioError catch (e) {
       handleDioExceptions(e);
+      rethrow;
     }
   }
 
   @override
-  Future patch(
+  Future<Response> patch(
       String path, {
         dynamic data,
         Map<String, dynamic>? queryParameters,
@@ -67,14 +69,15 @@ class DioConsumer extends ApiConsumer {
         data: isFromData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      return response.data;
-    } on DioException catch (e) {
+      return response;
+    } on DioError catch (e) {
       handleDioExceptions(e);
+      rethrow;
     }
   }
 
   @override
-  Future post(
+  Future<Response> post(
       String path, {
         dynamic data,
         Map<String, dynamic>? queryParameters,
@@ -86,9 +89,10 @@ class DioConsumer extends ApiConsumer {
         data: isFromData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      return response.data;
-    } on DioException catch (e) {
+      return response;
+    } on DioError catch (e) {
       handleDioExceptions(e);
+      rethrow;
     }
   }
 }

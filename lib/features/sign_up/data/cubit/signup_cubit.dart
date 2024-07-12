@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:quickmart/core/networking/APIConsumer.dart';
@@ -27,11 +28,18 @@ class SignupCubit extends Cubit<SignupState> {
 
 
       },isFromData: true);
-      emit(SignUpSuccess());
+      if (response.data['status'] == true) {
+        emit(SignUpSuccess());
+      }
+      else {
+        emit(SignUpFalure(errorMessage: response.data['message'] ?? 'Unknown error occurred'));
+      }
       return response;
-    } on Exception catch (e) {
+    }  on DioException catch (e) {
+      emit(SignUpFalure(errorMessage: e.response?.data['message'] ?? e.toString()));
+    } catch (e) {
       emit(SignUpFalure(errorMessage: e.toString()));
+    }
     }
   }
 
-}

@@ -6,6 +6,8 @@ import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/theming/colors.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/core/widgets/app_text_form_field.dart';
+
+import 'package:quickmart/features/home/ui/home_screen.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
 
 class EmailAndPassword extends StatefulWidget {
@@ -25,7 +27,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         if (state is SignInSuccess) {
 
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('success')));
+              .showSnackBar(SnackBar(content: Text('Success')));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
         } else if (state is SignInFalure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errorMessage)));

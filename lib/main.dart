@@ -2,11 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quickmart/core/cache/cache_helper.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
 import 'package:quickmart/features/login/ui/login_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  CacheHelper().init();
   runApp(BlocProvider(
     create: (context) => LoginCubit(DioConsumer(dio: Dio())),
     child: MyApp(),
