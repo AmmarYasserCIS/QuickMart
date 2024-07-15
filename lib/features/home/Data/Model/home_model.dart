@@ -1,133 +1,237 @@
+import 'dart:convert';
+
 class HomeModel {
-  bool status;
-  dynamic message;
-  List<Banner> banners;
-  List<Product> products;
-  String ad;
+  final int results;
+  final Metadata metadata;
+  final List<Product> data;
 
   HomeModel({
-    required this.status,
-    this.message,
-    required this.banners,
-    required this.products,
-    required this.ad,
+    required this.results,
+    required this.metadata,
+    required this.data,
   });
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
     return HomeModel(
-      status: json['status'],
-      message: json['message'],
-      banners: List<Banner>.from(
-          json['data']['banners'].map((x) => Banner.fromJson(x))),
-      products: List<Product>.from(
-          json['data']['products'].map((x) => Product.fromJson(x))),
-      ad: json['data']['ad'],
+      results: json['results'],
+      metadata: Metadata.fromJson(json['metadata']),
+      data: List<Product>.from(json['data'].map((item) => Product.fromJson(item))),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'status': status,
-      'message': message,
-      'data': {
-        'banners': banners.map((x) => x.toJson()).toList(),
-        'products': products.map((x) => x.toJson()).toList(),
-        'ad': ad,
-      },
+      'results': results,
+      'metadata': metadata.toJson(),
+      'data': List<dynamic>.from(data.map((product) => product.toJson())),
     };
   }
 }
 
-class Banner {
-  int id;
-  String image;
-  dynamic category;
-  dynamic product;
+class Metadata {
+  final int currentPage;
+  final int numberOfPages;
+  final int limit;
+  final int? nextPage;
 
-  Banner({
-    required this.id,
-    required this.image,
-    this.category,
-    this.product,
+  Metadata({
+    required this.currentPage,
+    required this.numberOfPages,
+    required this.limit,
+    this.nextPage,
   });
 
-  factory Banner.fromJson(Map<String, dynamic> json) {
-    return Banner(
-      id: json['id'],
-      image: json['image'],
-      category: json['category'],
-      product: json['product'],
+  factory Metadata.fromJson(Map<String, dynamic> json) {
+    return Metadata(
+      currentPage: json['currentPage'],
+      numberOfPages: json['numberOfPages'],
+      limit: json['limit'],
+      nextPage: json['nextPage'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'image': image,
-      'category': category,
-      'product': product,
+      'currentPage': currentPage,
+      'numberOfPages': numberOfPages,
+      'limit': limit,
+      'nextPage': nextPage,
     };
   }
 }
 
 class Product {
-  int id;
-  double price;
-  double oldPrice;
-  double discount;
-  String image;
-  String name;
-  String description;
-  List<String> images;
-  bool inFavorites;
-  bool inCart;
+  final int sold;
+  final List<String> images;
+  final List<Subcategory> subcategory;
+  final int ratingsQuantity;
+  final String id;
+  final String title;
+  final String slug;
+  final String description;
+  final int quantity;
+  final double price;
+  final String imageCover;
+  final Category category;
+  final Brand brand;
+  final double ratingsAverage;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Product({
-    required this.id,
-    required this.price,
-    required this.oldPrice,
-    required this.discount,
-    required this.image,
-    required this.name,
-    required this.description,
+    required this.sold,
     required this.images,
-    required this.inFavorites,
-    required this.inCart,
+    required this.subcategory,
+    required this.ratingsQuantity,
+    required this.id,
+    required this.title,
+    required this.slug,
+    required this.description,
+    required this.quantity,
+    required this.price,
+    required this.imageCover,
+    required this.category,
+    required this.brand,
+    required this.ratingsAverage,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'],
-      price: (json['price'] is int)
-          ? (json['price'] as int).toDouble()
-          : json['price'],
-      oldPrice: (json['old_price'] is int)
-          ? (json['old_price'] as int).toDouble()
-          : json['old_price'],
-      discount: (json['discount'] is int)
-          ? (json['discount'] as int).toDouble()
-          : json['discount'],
-      image: json['image'],
-      name: json['name'],
-      description: json['description'],
+      sold: json['sold'],
       images: List<String>.from(json['images']),
-      inFavorites: json['in_favorites'],
-      inCart: json['in_cart'],
+      subcategory: List<Subcategory>.from(json['subcategory'].map((item) => Subcategory.fromJson(item))),
+      ratingsQuantity: json['ratingsQuantity'],
+      id: json['_id'],
+      title: json['title'],
+      slug: json['slug'],
+      description: json['description'],
+      quantity: json['quantity'],
+      price: json['price'].toDouble(),
+      imageCover: json['imageCover'],
+      category: Category.fromJson(json['category']),
+      brand: Brand.fromJson(json['brand']),
+      ratingsAverage: json['ratingsAverage'].toDouble(),
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'price': price,
-      'old_price': oldPrice,
-      'discount': discount,
-      'image': image,
-      'name': name,
+      'sold': sold,
+      'images': List<dynamic>.from(images),
+      'subcategory': List<dynamic>.from(subcategory.map((sub) => sub.toJson())),
+      'ratingsQuantity': ratingsQuantity,
+      '_id': id,
+      'title': title,
+      'slug': slug,
       'description': description,
-      'images': images,
-      'in_favorites': inFavorites,
-      'in_cart': inCart,
+      'quantity': quantity,
+      'price': price,
+      'imageCover': imageCover,
+      'category': category.toJson(),
+      'brand': brand.toJson(),
+      'ratingsAverage': ratingsAverage,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+}
+
+class Subcategory {
+  final String id;
+  final String name;
+  final String slug;
+  final String category;
+
+  Subcategory({
+    required this.id,
+    required this.name,
+    required this.slug,
+    required this.category,
+  });
+
+  factory Subcategory.fromJson(Map<String, dynamic> json) {
+    return Subcategory(
+      id: json['_id'],
+      name: json['name'],
+      slug: json['slug'],
+      category: json['category'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'slug': slug,
+      'category': category,
+    };
+  }
+}
+
+class Category {
+  final String id;
+  final String name;
+  final String slug;
+  final String image;
+
+  Category({
+    required this.id,
+    required this.name,
+    required this.slug,
+    required this.image,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['_id'],
+      name: json['name'],
+      slug: json['slug'],
+      image: json['image'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'slug': slug,
+      'image': image,
+    };
+  }
+}
+
+class Brand {
+  final String id;
+  final String name;
+  final String slug;
+  final String image;
+
+  Brand({
+    required this.id,
+    required this.name,
+    required this.slug,
+    required this.image,
+  });
+
+  factory Brand.fromJson(Map<String, dynamic> json) {
+    return Brand(
+      id: json['_id'],
+      name: json['name'],
+      slug: json['slug'],
+      image: json['image'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'slug': slug,
+      'image': image,
     };
   }
 }

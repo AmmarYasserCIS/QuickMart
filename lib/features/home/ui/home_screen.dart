@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/theming/Styles.dart'; // Adjust import paths as necessary
 import 'package:quickmart/core/theming/colors.dart';
+import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
+import 'package:quickmart/features/home/ui/widgets/categories.dart';
 import 'package:quickmart/features/home/ui/widgets/home_screen_banners.dart';
 import 'package:quickmart/features/home/ui/widgets/home_screen_header.dart';
 import 'package:quickmart/features/home/ui/widgets/productsBuilder.dart';
@@ -21,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().getHomeData(); // Fetch home data on init
+    context.read<HomeCubit>().getHomeData();
+    context.read<CategoriesCubit>().getCategoryData(); // Fetch home data on init
   }
 
   @override
@@ -32,6 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
           create: (context) =>
           HomeCubit(DioConsumer(dio: Dio()))
             ..getHomeData(),
+        ),
+        BlocProvider(
+          create: (context) =>
+          CategoriesCubit(DioConsumer(dio: Dio()))
+            ..getCategoryData(),
         ),
       ],
       child: Scaffold(
@@ -47,40 +55,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: HomeScreenHeader(),
                   ),
                   SizedBox(height: 24.h),
-                  HomeBanners(),
+                  //HomeBanners(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        'https://static.vecteezy.com/system/resources/thumbnails/018/943/054/small_2x/3d-banner-realistic-accessories-for-mobile-game-console-controller-headphones-joystick-smart-watches-illustration-vector.jpg',
+                        width: 320.w, // Adjust width as needed
+                        fit: BoxFit.cover, // Ensure the image covers the rounded rectangle
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 24.h),
                   Text(
                     'Categories',
                     style: TextStyles.font24BlackBold,
                   ),
                   SizedBox(height: 16.h),
-                  SizedBox(
-                    height: 40.h, // Adjust the height as needed
-                    child: ListView.builder(
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Container(
-                            width: 100.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: ColorsManager.gray.withOpacity(0.2),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'data',
-                                style: TextStyles.font14BlackSemiBold,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  CategoriesBuilder(),
+
+
                   SizedBox(height: 24.h),
                   Text(
                     'Latest Products',

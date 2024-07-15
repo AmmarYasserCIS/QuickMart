@@ -51,6 +51,7 @@ dependencies:
   flutter_svg: ^2.0.9
   flutter_screenutil: ^5.9.0
   build_runner: ^2.3.3
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:

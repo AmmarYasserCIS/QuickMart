@@ -1,75 +1,57 @@
-class UserModel {
-  bool status;
-  String message;
-  UserData data;
+import 'dart:convert';
 
-  UserModel({
-    required this.status,
+class UserResponse {
+  final String message;
+  final User user;
+  final String token;
+
+  UserResponse({
     required this.message,
-    required this.data,
-  });
-
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      status: json['status'],
-      message: json['message'],
-      data: UserData.fromJson(json['data']),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'message': message,
-      'data': data.toJson(),
-    };
-  }
-}
-
-class UserData {
-  int id;
-  String name;
-  String email;
-  String phone;
-  String image;
-  int points;
-  int credit;
-  String token;
-
-  UserData({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.image,
-    required this.points,
-    required this.credit,
+    required this.user,
     required this.token,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) {
-    return UserData(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
-      image: json['image'],
-      points: json['points'],
-      credit: json['credit'],
+  factory UserResponse.fromJson(Map<String, dynamic> json) {
+    return UserResponse(
+      message: json['message'],
+      user: User.fromJson(json['user']),
       token: json['token'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'message': message,
+      'user': user.toJson(),
+      'token': token,
+    };
+  }
+}
+
+class User {
+  final String name;
+  final String email;
+  final String role;
+
+  User({
+    required this.name,
+    required this.email,
+    required this.role,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      name: json['name'],
+      email: json['email'],
+      role: json['role'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
       'name': name,
       'email': email,
-      'phone': phone,
-      'image': image,
-      'points': points,
-      'credit': credit,
-      'token': token,
+      'role': role,
     };
   }
 }

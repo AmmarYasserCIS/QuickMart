@@ -16,7 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   TextEditingController signInEmail = TextEditingController();
   TextEditingController signInPassword = TextEditingController();
-  UserModel? user;
+
 
   Future<void> signIn() async {
     try {
@@ -24,13 +24,11 @@ class LoginCubit extends Cubit<LoginState> {
       final response = await api.post(EndPoint.signIn, data: {
         ApiKey.email: signInEmail.text,
         ApiKey.password: signInPassword.text,
-      }, isFromData: true);
+      }, isFromData: false);
 
-      if (response.data['status'] == true) {
+      if (response.data['message'] == "success") {
 
-        CacheHelper().saveData(key: ApiKey.token, value: response.data['data']['token']);
-        CacheHelper().saveData(key: ApiKey.id, value: response.data['data']['id']);
-        CacheHelper().saveData(key: ApiKey.image, value: response.data['data']['image']);
+        CacheHelper().saveData(key: ApiKey.token, value: response.data['token']);
 
         emit(SignInSuccess());
       } else {

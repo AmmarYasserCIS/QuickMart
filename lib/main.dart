@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/cache/cache_helper.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
+import 'package:quickmart/features/Product/ui/product.dart';
+import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/login/ui/login_screen.dart';
@@ -26,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeCubit(DioConsumer(dio: Dio())),
+        ),
+        BlocProvider(
+          create: (context) => CategoriesCubit(DioConsumer(dio: Dio())),
         ),
       ],
       child: ScreenUtilInit(

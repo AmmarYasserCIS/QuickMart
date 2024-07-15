@@ -43,14 +43,13 @@ class _ProductCardState extends State<ProductCard> {
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: Container(
+                  child: Container(width: 32,height: 32,
                     decoration: BoxDecoration(
                       color: Colors.black,
                       shape: BoxShape.circle,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
+                    child: Center(
+                      child: Icon(size: 20,
                         Icons.favorite_border,
                         color: Colors.white,
                       ),

@@ -81,6 +81,13 @@ class TextStyles {
     color: ColorsManager.gray,
     fontFamily: 'Plus Jakarta Sans',
   );
+  static TextStyle font18GrayRegular = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.gray,
+    fontFamily: 'Plus Jakarta Sans',
+  );
+
 
   static TextStyle font14LightGrayRegular = TextStyle(
     fontSize: 14.sp,
