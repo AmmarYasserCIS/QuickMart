@@ -4,6 +4,7 @@ class EndPoint {
   static String signUp = "register";
   static String category = "api/v1/categories";
   static String home = "api/v1/products?limit=20&category[in]=6439d2d167d9aa4ca970649f";
+  static String products="api/v1/products";
 
 }
 

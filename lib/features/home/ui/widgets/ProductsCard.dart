@@ -4,7 +4,7 @@ import 'package:quickmart/core/theming/Styles.dart';
 
 class ProductCard extends StatefulWidget {
   final String name;
-  final String price;
+  final double price;
   final String image;
 
   ProductCard({

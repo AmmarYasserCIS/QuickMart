@@ -1,12 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/theming/colors.dart';
+import 'package:quickmart/features/category_products/data/cubit/category_products_cubit.dart';
+import 'package:quickmart/features/category_products/ui/category_Products.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 
 class CategoriesBuilder extends StatelessWidget {
   const CategoriesBuilder({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +39,36 @@ class CategoriesBuilder extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final category = categories[index];
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: IntrinsicWidth(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: ColorsManager.gray.withOpacity(0.2),
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (context) => CategoryProductsCubit(DioConsumer(dio: Dio())),
+                          child: CategoryProductsScreen(categoryValue: category.id),
                         ),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                        child: Text(
-                          category.name,
-                          style: TextStyles.font14BlackSemiBold.copyWith(),
+                    );
+
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: IntrinsicWidth(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: ColorsManager.gray.withOpacity(0.2),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 8.h),
+                          child: Text(
+                            category.name,
+                            style: TextStyles.font14BlackSemiBold.copyWith(),
+                          ),
                         ),
                       ),
                     ),

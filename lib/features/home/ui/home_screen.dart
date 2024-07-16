@@ -5,12 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/theming/Styles.dart'; // Adjust import paths as necessary
 import 'package:quickmart/core/theming/colors.dart';
+import 'package:quickmart/features/category_products/data/cubit/category_products_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/home/ui/widgets/categories.dart';
 import 'package:quickmart/features/home/ui/widgets/home_screen_banners.dart';
 import 'package:quickmart/features/home/ui/widgets/home_screen_header.dart';
-import 'package:quickmart/features/home/ui/widgets/productsBuilder.dart';
+import 'package:quickmart/features/home/ui/widgets/home_productsBuilder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<HomeCubit>().getHomeData();
-    context.read<CategoriesCubit>().getCategoryData(); // Fetch home data on init
+    context.read<CategoriesCubit>().getCategoryData();
+    // Fetch home data on init
   }
 
   @override
