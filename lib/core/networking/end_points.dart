@@ -5,6 +5,7 @@ class EndPoint {
   static String category = "api/v1/categories";
   static String home = "api/v1/products?limit=20&category[in]=6439d2d167d9aa4ca970649f";
   static String products="api/v1/products";
+  static String cart="api/v1/cart";
 
 }
 
@@ -22,4 +23,5 @@ class ApiKey {
   static String location = "location";
   static String profilePic = "profilePic";
   static String image = "image";
+  static String productId = "productId";
 }

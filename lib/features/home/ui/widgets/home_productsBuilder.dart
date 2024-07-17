@@ -31,7 +31,7 @@ class _ProductsState extends State<Products> {
           return Center(child: Text('Failed to load products'));
         } else if (state is HomeSuccess) {
           final products = state.home.data;
-          return  ProductsBuilder(
+          return ProductsBuilder(
             itemCount: products.length,
             getName: (index) => products[index].title,
             getPrice: (index) => products[index].price,
@@ -39,6 +39,7 @@ class _ProductsState extends State<Products> {
             getImages: (index) => products[index].images,
             getId: (index) => products[index].id,
             getDescription: (index) => products[index].description,
+            ratingsAverage: (index) => products[index].ratingsAverage,
           );
         } else {
           return Center(child: Text('No products available'));

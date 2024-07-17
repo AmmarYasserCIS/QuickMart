@@ -36,7 +36,7 @@ class _CategoryProductsBuilderState extends State<CategoryProductsBuilder> {
             getImage: (index) => products[index].imageCover,
             getImages: (index) => products[index].images,
             getId: (index) => products[index].id,
-            getDescription: (index) => products[index].description,
+            getDescription: (index) => products[index].description, ratingsAverage: (index) => products[index].ratingsAverage,
           );
         } else {
           return Center(child: Text('No products available'));

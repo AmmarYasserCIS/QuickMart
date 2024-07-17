@@ -8,6 +8,7 @@ class ProductsBuilder extends StatelessWidget {
   final int itemCount;
   final String Function(int) getName;
   final double Function(int) getPrice;
+  final double Function(int) ratingsAverage;
   final String Function(int) getImage;
   final List<String> Function(int) getImages;
   final String Function(int) getId;
@@ -21,7 +22,7 @@ class ProductsBuilder extends StatelessWidget {
     required this.getImage,
     required this.getImages,
     required this.getId,
-    required this.getDescription,
+    required this.getDescription, required this.ratingsAverage,
   }) : super(key: key);
 
   @override
@@ -51,7 +52,7 @@ class ProductsBuilder extends StatelessWidget {
                     name: getName(index),
                     id: getId(index),
                     description: getDescription(index),
-                    images: getImages(index),
+                    images: getImages(index), rating: ratingsAverage(index),
                   ),
                 ),
               );

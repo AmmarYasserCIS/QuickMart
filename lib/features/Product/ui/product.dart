@@ -1,27 +1,31 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/theming/colors.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:expandable/expandable.dart';
 import 'package:quickmart/core/widgets/star_rating.dart';
+import 'package:quickmart/features/Product/data/cubit/add_cart_cubit.dart';
 import 'package:quickmart/features/Product/ui/widgets/buy_add_to_card_buttons.dart';
 
 class DetailedProduct extends StatefulWidget {
   DetailedProduct({
     super.key,
-    required this.images, // Change to list of images
+    required this.images,
     required this.name,
     required this.price,
     required this.id,
-    required this.description,
+    required this.description, required this.rating,
 
   });
 
-  final List<String> images; // Change to a list
+  final List<String> images;
   final String name;
   final double price;
-
+  final double rating;
   final String id;
   final String description;
 
@@ -105,10 +109,10 @@ class _DetailedProductState extends State<DetailedProduct> {
                             color: Colors.blue),
                         child: Center(
                             child: Text(
-                          'Top Rated',
-                          style: TextStyles.font12BlackMedium
-                              .copyWith(color: Colors.white),
-                        )),
+                              'Top Rated',
+                              style: TextStyles.font12BlackMedium
+                                  .copyWith(color: Colors.white),
+                            )),
                         height: 32.h,
                         width: 84.w,
                       ),
@@ -152,7 +156,7 @@ class _DetailedProductState extends State<DetailedProduct> {
                     ),
                     SizedBox(height: 20.h),
                     RatingWidget(
-                      rating: 4,
+                      rating: widget.rating,
                     ),
                     Text(
                       'Description :-',
@@ -197,7 +201,10 @@ class _DetailedProductState extends State<DetailedProduct> {
                       ),
                     ),
                     SizedBox(height: 24.h),
-                    BuyBowButtons(),
+                    BlocProvider(
+                      create: (context) => AddCartCubit(DioConsumer(dio: Dio())),
+                      child: BuyBowButtons(id: widget.id,),
+                    ),
                     // Add some padding at the bottom
                   ],
                 ),

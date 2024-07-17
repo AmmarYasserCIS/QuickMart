@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
-import 'package:quickmart/core/theming/Styles.dart'; // Adjust import paths as necessary
-import 'package:quickmart/core/theming/colors.dart';
-import 'package:quickmart/features/category_products/data/cubit/category_products_cubit.dart';
+import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/home/ui/widgets/categories.dart';
-import 'package:quickmart/features/home/ui/widgets/home_screen_banners.dart';
 import 'package:quickmart/features/home/ui/widgets/home_screen_header.dart';
 import 'package:quickmart/features/home/ui/widgets/home_productsBuilder.dart';
 
@@ -64,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(16),
                       child: Image.network(
                         'https://static.vecteezy.com/system/resources/thumbnails/018/943/054/small_2x/3d-banner-realistic-accessories-for-mobile-game-console-controller-headphones-joystick-smart-watches-illustration-vector.jpg',
-                        width: 320.w, // Adjust width as needed
-                        fit: BoxFit.cover, // Ensure the image covers the rounded rectangle
+                        width: 320.w,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
