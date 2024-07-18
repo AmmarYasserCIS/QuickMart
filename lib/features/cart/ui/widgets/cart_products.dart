@@ -1,32 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/features/cart/data/cubit/cart_products_cubit.dart';
 
 class CartProducts extends StatefulWidget {
-   CartProducts({Key? key, required this.name, required this.image, required this.price}) : super(key: key);
-   final String name;
-   final String image;
-   final int price;
+  CartProducts({
+    Key? key,
+    required this.name,
+    required this.image,
+    required this.price,
+    required this.id,
+    required this.count,
+  }) : super(key: key);
 
+  final String name;
+  final String image;
+  final int price;
+  final String id;
+  final int count;
 
   @override
   _CartProductsState createState() => _CartProductsState();
 }
 
 class _CartProductsState extends State<CartProducts> {
-  int quantity = 1; // Initial quantity
+  late int _count;
+
+  @override
+  void initState() {
+    super.initState();
+    _count = widget.count;
+  }
 
   void increaseQuantity() {
     setState(() {
-      quantity++;
+      _count++;
+      context.read<CartProductsCubit>().updateCartItemCount(widget.id, 4);
     });
   }
 
   void decreaseQuantity() {
     setState(() {
-      if (quantity > 1) {
-        quantity--;
+      if (_count > 1) {
+        _count--;
+        context.read<CartProductsCubit>().updateCartItemCount(widget.id, _count);
       }
     });
   }
@@ -40,7 +59,7 @@ class _CartProductsState extends State<CartProducts> {
         children: [
           Container(
             child: Image.network(
-              '${widget.image}',
+              widget.image,
               width: 120.w,
               height: 120.h,
             ),
@@ -52,7 +71,7 @@ class _CartProductsState extends State<CartProducts> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${widget.name}',
+                  widget.name,
                   style: TextStyles.font14BlackSemiBold,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -80,7 +99,7 @@ class _CartProductsState extends State<CartProducts> {
                               icon: Icon(Icons.remove),
                             ),
                             Text(
-                              '$quantity',
+                              '$_count',
                               style: TextStyle(fontSize: 16.sp),
                             ),
                             IconButton(
@@ -92,7 +111,12 @@ class _CartProductsState extends State<CartProducts> {
                       ),
                     ),
                     Spacer(),
-                    SvgPicture.asset('assets/svgs/trash.svg')
+                    InkWell(
+                      onTap: () {
+                        context.read<CartProductsCubit>().deleteCartItem(widget.id);
+                      },
+                      child: SvgPicture.asset('assets/svgs/trash.svg'),
+                    ),
                   ],
                 ),
               ],

@@ -23,7 +23,9 @@ class CartScreen extends StatelessWidget {
         } else if (state is CartProductsSuccess) {
           final products = state.cart.data;
           return Scaffold(
-              appBar: AppBar(title: Text('My Cart'), centerTitle: true),
+              appBar: AppBar(title: Text('My Cart'), centerTitle: true,actions: [IconButton(onPressed: () {
+                context.read<CartProductsCubit>().getCartData();
+              },icon: Icon(Icons.refresh)),SizedBox(width: 10.w,)]),
               body: Center(
                 child: Column(
                   children: [
@@ -34,7 +36,7 @@ class CartScreen extends StatelessWidget {
                           return CartProducts(
                             name: products.products[index].product.title,
                             image: products.products[index].product.imageCover,
-                            price: products.products[index].price,
+                            price: products.products[index].price, id:products.products[index].product.id, count: products.products[index].count ,
                           );
                         },
                       ),

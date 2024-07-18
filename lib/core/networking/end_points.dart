@@ -7,6 +7,9 @@ class EndPoint {
       "api/v1/products?limit=20&category[in]=6439d2d167d9aa4ca970649f";
   static String products = "api/v1/products";
   static String cart = "api/v1/cart";
+  static String DeleteCartitem(id){
+    return "api/v1/cart/$id";
+  }
 }
 
 class ApiKey {
