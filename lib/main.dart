@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'QuickMart',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,

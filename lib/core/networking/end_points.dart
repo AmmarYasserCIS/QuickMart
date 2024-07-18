@@ -3,14 +3,16 @@ class EndPoint {
   static String signIn = "api/v1/auth/signin";
   static String signUp = "register";
   static String category = "api/v1/categories";
-  static String home = "api/v1/products?limit=20&category[in]=6439d2d167d9aa4ca970649f";
-  static String products="api/v1/products";
-  static String cart="api/v1/cart";
-
+  static String home =
+      "api/v1/products?limit=20&category[in]=6439d2d167d9aa4ca970649f";
+  static String products = "api/v1/products";
+  static String cart = "api/v1/cart";
 }
 
 class ApiKey {
   static String status = "status";
+  static String userName = "name";
+  static String userEmail = "email";
   static String errorMessage = "message";
   static String email = "email";
   static String password = "password";

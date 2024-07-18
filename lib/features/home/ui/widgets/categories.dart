@@ -46,7 +46,7 @@ class CategoriesBuilder extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => BlocProvider(
                           create: (context) => CategoryProductsCubit(DioConsumer(dio: Dio())),
-                          child: CategoryProductsScreen(categoryValue: category.id),
+                          child: CategoryProductsScreen(categoryValue: category.id, categoryName: category.name,),
                         ),
                       ),
                     );

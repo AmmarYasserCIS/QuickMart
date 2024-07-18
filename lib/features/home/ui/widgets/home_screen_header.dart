@@ -27,7 +27,7 @@ class HomeScreenHeader extends StatelessWidget {
             width: 32.w,
             height: 32.h,
             child: Image.network(
-              CacheHelper().getData(key: ApiKey.image),
+              'https://i0.wp.com/icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-18.jpg',
               fit: BoxFit.cover,
             ),
           ),

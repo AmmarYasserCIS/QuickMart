@@ -11,6 +11,12 @@ class TextStyles {
     color: Colors.black,
     fontFamily: 'Plus Jakarta Sans',
   );
+  static TextStyle font24WhiteBold = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: Colors.white,
+    fontFamily: 'Plus Jakarta Sans',
+  );
 
   static TextStyle font32CyanBold = TextStyle(
     fontSize: 32.sp,
@@ -170,6 +176,12 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.Black,
+    fontFamily: 'Plus Jakarta Sans',
+  );
+  static TextStyle font16GrayBold = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.gray,
     fontFamily: 'Plus Jakarta Sans',
   );
 

@@ -6,6 +6,7 @@ import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/theming/colors.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/core/widgets/app_text_form_field.dart';
+import 'package:quickmart/core/widgets/bottom_navigation_bar.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 
@@ -34,7 +35,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           context.read<CategoriesCubit>().getCategoryData();
           Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) =>  HomeScreen()));
+              MaterialPageRoute(builder: (context) =>  bottomNavigationBar()));
         } else if (state is SignInFalure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errorMessage)));
