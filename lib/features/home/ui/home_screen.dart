@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/features/cart/data/cubit/cart_products_cubit.dart';
+import 'package:quickmart/features/cart/ui/widgets/cart_products.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/home/ui/widgets/categories.dart';
@@ -23,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     context.read<HomeCubit>().getHomeData();
     context.read<CategoriesCubit>().getCategoryData();
+    context.read<CartProductsCubit>().getCartData();
     // Fetch home data on init
   }
 
