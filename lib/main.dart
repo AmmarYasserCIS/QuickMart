@@ -11,6 +11,7 @@ import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/login/ui/login_screen.dart';
+import 'package:quickmart/features/wishlist/data/cubti/wishlist_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartProductsCubit(DioConsumer(dio: Dio())),
+        ),
+        BlocProvider(
+          create: (context) => WishlistCubit(DioConsumer(dio: Dio())),
         ),
       ],
       child: ScreenUtilInit(

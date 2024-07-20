@@ -10,7 +10,13 @@ class EndPoint {
   static String DeleteCartitem(id){
     return "api/v1/cart/$id";
   }
+  static String wishlist = "api/v1/wishlist";
+  static String DeleteWishlistitem(id){
+    return "api/v1/wishlist/$id";
+  }
 }
+
+
 
 class ApiKey {
   static String status = "status";

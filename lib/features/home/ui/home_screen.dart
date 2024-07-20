@@ -11,6 +11,7 @@ import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/home/ui/widgets/categories.dart';
 import 'package:quickmart/features/home/ui/widgets/home_screen_header.dart';
 import 'package:quickmart/features/home/ui/widgets/home_productsBuilder.dart';
+import 'package:quickmart/features/wishlist/data/cubti/wishlist_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomeCubit>().getHomeData();
     context.read<CategoriesCubit>().getCategoryData();
     context.read<CartProductsCubit>().getCartData();
+    context.read<WishlistCubit>().getWishlistData();
     // Fetch home data on init
   }
 

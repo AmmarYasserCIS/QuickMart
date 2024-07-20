@@ -4,7 +4,7 @@ import 'package:quickmart/features/Product/ui/product.dart';
 import 'package:quickmart/features/home/Data/Model/home_model.dart';
 import 'package:quickmart/features/home/ui/widgets/ProductsCard.dart';
 
-class ProductsBuilder extends StatelessWidget {
+class ProductsBuilder extends StatefulWidget {
   final int itemCount;
   final String Function(int) getName;
   final double Function(int) getPrice;
@@ -22,8 +22,28 @@ class ProductsBuilder extends StatelessWidget {
     required this.getImage,
     required this.getImages,
     required this.getId,
-    required this.getDescription, required this.ratingsAverage,
+    required this.getDescription,
+    required this.ratingsAverage,
   }) : super(key: key);
+
+  @override
+  _ProductsBuilderState createState() => _ProductsBuilderState();
+}
+
+class _ProductsBuilderState extends State<ProductsBuilder> {
+  late List<bool> wishlistStatus;
+
+  @override
+  void initState() {
+    super.initState();
+    wishlistStatus = List<bool>.filled(widget.itemCount, false);
+  }
+
+  void toggleWishlistStatus(int index) {
+    setState(() {
+      wishlistStatus[index] = !wishlistStatus[index];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +60,7 @@ class ProductsBuilder extends StatelessWidget {
           crossAxisSpacing: 16.w,
           mainAxisSpacing: 16.h,
         ),
-        itemCount: itemCount,
+        itemCount: widget.itemCount,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
@@ -48,19 +68,23 @@ class ProductsBuilder extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => DetailedProduct(
-                    price: getPrice(index),
-                    name: getName(index),
-                    id: getId(index),
-                    description: getDescription(index),
-                    images: getImages(index), rating: ratingsAverage(index),
+                    price: widget.getPrice(index),
+                    name: widget.getName(index),
+                    id: widget.getId(index),
+                    description: widget.getDescription(index),
+                    images: widget.getImages(index),
+                    rating: widget.ratingsAverage(index),
                   ),
                 ),
               );
             },
             child: ProductCard(
-              price: getPrice(index),
-              name: getName(index),
-              image: getImage(index),
+              price: widget.getPrice(index),
+              name: widget.getName(index),
+              image: widget.getImage(index),
+              id: widget.getId(index),
+              isInWishlist: wishlistStatus[index],
+              onWishlistToggle: () => toggleWishlistStatus(index),
             ),
           );
         },
