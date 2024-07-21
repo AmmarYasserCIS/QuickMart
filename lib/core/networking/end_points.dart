@@ -14,6 +14,9 @@ class EndPoint {
   static String DeleteWishlistitem(id){
     return "api/v1/wishlist/$id";
   }
+  static String Checkout(id){
+    return "api/v1/orders/checkout-session/$id";
+  }
 }
 
 

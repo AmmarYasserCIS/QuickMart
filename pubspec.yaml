@@ -52,6 +52,8 @@ dependencies:
   flutter_screenutil: ^5.9.0
   build_runner: ^2.3.3
   expandable: ^5.0.1
+  url_launcher: ^6.0.9
+  webview_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/features/cart/data/cubit/cart_products_cubit.dart';
+import 'package:quickmart/features/cart/ui/checkout.dart';
 import 'package:quickmart/features/cart/ui/widgets/cart_products.dart';
 
 class CartScreen extends StatelessWidget {
@@ -103,6 +104,10 @@ class CartScreen extends StatelessWidget {
                               fontSize: 13.sp
                             ),
                             onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  CheckoutScreen(id: products.id)));
+
                               ;
                             },
                           ),
