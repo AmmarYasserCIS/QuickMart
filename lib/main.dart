@@ -12,6 +12,7 @@ import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
 import 'package:quickmart/features/login/data/Cubit/login_cubit.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/login/ui/login_screen.dart';
+import 'package:quickmart/features/onBoarding/onboarding.dart';
 import 'package:quickmart/features/wishlist/data/cubti/wishlist_cubit.dart';
 
 void main() {
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: LoginScreen(),
+          home: OnboardingScreen(),
         ),
       ),
     );

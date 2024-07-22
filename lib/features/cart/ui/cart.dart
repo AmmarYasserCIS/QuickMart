@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/core/widgets/app_circular_indecator.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/features/cart/data/cubit/cart_products_cubit.dart';
 import 'package:quickmart/features/cart/ui/checkout.dart';
@@ -18,7 +19,7 @@ class CartScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is CartProductsLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: Loading());
         } else if (state is CartProductsFaliure) {
           return Center(child: Text('Failed to load products'));
         } else if (state is CartProductsSuccess) {

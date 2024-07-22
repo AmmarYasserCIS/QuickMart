@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/theming/colors.dart';
-import 'package:quickmart/core/widgets/app_tile.dart';
 import 'package:quickmart/features/profile/ui/widgets/profile_header.dart';
 import 'package:quickmart/features/profile/ui/widgets/profile_tiles.dart';
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

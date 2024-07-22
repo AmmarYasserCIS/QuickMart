@@ -4,10 +4,83 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quickmart/core/cache/cache_helper.dart';
 import 'package:quickmart/core/networking/end_points.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/core/theming/colors.dart';
+import 'package:quickmart/core/widgets/app_text_button.dart';
+import 'package:quickmart/features/login/ui/login_screen.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends StatefulWidget {
   const ProfileHeader({super.key});
 
+  @override
+  State<ProfileHeader> createState() => _ProfileHeaderState();
+}
+void _showAlertDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Center(
+            child: Text(
+                'Logout',style: TextStyles.font16BlackBold,
+            )),
+        content: Container(
+          height: 60,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                "Are You Sure You Want",style: TextStyles.font12BlackRegular,
+
+              ),
+              Text(
+                "To Logout ?",style: TextStyles.font12BlackRegular,
+
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          Divider(color: ColorsManager.gray, height: 0.5),
+          SizedBox(
+            height: 10,
+          ),
+          Column(
+            children: [
+              AppTextButton(
+                buttonText: "Logout !",
+                backgroundColor: Colors.red.withOpacity(.4),
+                textStyle: TextStyle(color: Colors.white),
+                borderSideColor: Colors.red.withOpacity(.3),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              InkWell(onTap: () {
+                Navigator.of(context).pop();
+              },
+                child: Text(
+                  "Cancel",
+
+                ),
+              ),
+            ],
+          )
+        ],
+      );
+    },
+  );
+}
+
+class _ProfileHeaderState extends State<ProfileHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +107,9 @@ class ProfileHeader extends StatelessWidget {
             ],
           ),
           Spacer(),
-          SvgPicture.asset('assets/svgs/logout.svg',width: 32.w,height: 32.h,)
+          InkWell(onTap: () {
+            _showAlertDialog(context);
+          },child: SvgPicture.asset('assets/svgs/logout.svg',width: 32.w,height: 32.h,))
         ],
       ),
     );

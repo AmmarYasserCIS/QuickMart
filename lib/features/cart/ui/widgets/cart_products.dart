@@ -37,7 +37,7 @@ class _CartProductsState extends State<CartProducts> {
   void increaseQuantity() {
     setState(() {
       _count++;
-      context.read<CartProductsCubit>().updateCartItemCount(widget.id, 4);
+      context.read<CartProductsCubit>().updateCartItemCount(widget.id, _count);
     });
   }
 

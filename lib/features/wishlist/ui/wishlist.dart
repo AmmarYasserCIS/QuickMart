@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/theming/Styles.dart';
+import 'package:quickmart/core/widgets/app_circular_indecator.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
 import 'package:quickmart/features/wishlist/data/cubti/wishlist_cubit.dart';
 import 'package:quickmart/features/wishlist/ui/widgets/wishlist_products.dart';
@@ -17,7 +18,7 @@ class WishlistScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is WishlistLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: Loading());
         } else if (state is WishlistFailure) {
           return Scaffold(
             appBar: AppBar(title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {

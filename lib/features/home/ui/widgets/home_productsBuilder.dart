@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quickmart/core/widgets/app_circular_indecator.dart';
 import 'package:quickmart/core/widgets/products_builder.dart';
 import 'package:quickmart/features/Product/ui/product.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
@@ -26,7 +27,7 @@ class _ProductsState extends State<Products> {
       },
       builder: (context, state) {
         if (state is HomeLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: Loading());
         } else if (state is HomeFaliure) {
           return Center(child: Text('Failed to load products'));
         } else if (state is HomeSuccess) {

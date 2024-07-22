@@ -60,7 +60,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                 style: TextStyles.font14BlackMedium,
               ),
               SizedBox(height: 8.h),
-              AppTextFormField(
+              AppTextFormField(textInputType: TextInputType.phone,
                 controller: context.read<CheckoutCubit>().checkoutPhone,
                 hintText: 'Enter your Phone Number',
                 validator: (value) => value?.isEmpty ?? true ? 'Phone number is required' : null,
@@ -76,7 +76,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                 hintText: 'Details',
                 validator: (value) => value?.isEmpty ?? true ? 'Details are required' : null,
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 30.h),
               AppTextButton(
                 borderRadius: 12,
                 backgroundColor: Colors.black,

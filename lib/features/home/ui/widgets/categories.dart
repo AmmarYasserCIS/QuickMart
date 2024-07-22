@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/networking/dio_consumer.dart';
 import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/theming/colors.dart';
+import 'package:quickmart/core/widgets/app_circular_indecator.dart';
 import 'package:quickmart/features/category_products/data/cubit/category_products_cubit.dart';
 import 'package:quickmart/features/category_products/ui/category_Products.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
@@ -25,7 +26,7 @@ class CategoriesBuilder extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is CategoriesLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: Loading());
         } else if (state is CategoriesSuccess) {
           final categories = state.categories.data;
 
