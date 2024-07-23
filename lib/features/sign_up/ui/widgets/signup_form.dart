@@ -16,130 +16,163 @@ class SignupForm extends StatefulWidget {
 }
 
 class _SignupFormState extends State<SignupForm> {
-  bool isObsecureText=false;
+  bool isObsecureText=true;
+  bool isObsecureText2=true;
   @override
   
   Widget build(BuildContext context) {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
-
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('success')));
+              .showSnackBar(SnackBar(content: Text('New account created successfully')));
         } else if (state is SignUpFalure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errorMessage)));
         }
       },
-  builder: (context, state) {
-    return Form(
-      key: context.read<SignupCubit>().signupFormKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Full Name',
-            style: TextStyles.font14BlackMedium,
+      builder: (context, state) {
+        return Form(
+          key: context.read<SignupCubit>().signupFormKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Full Name',
+                style: TextStyles.font14BlackMedium,
+              ),
+              SizedBox(height: 8.h),
+              AppTextFormField(
+                hintText: 'Enter Your Full Name',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Full Name cannot be empty';
+                  }
+                  return null;
+                },
+                controller: context.read<SignupCubit>().signupName,
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Email',
+                style: TextStyles.font14BlackMedium,
+              ),
+              SizedBox(height: 8.h),
+              AppTextFormField(
+                controller: context.read<SignupCubit>().signupEmail,
+                hintText: 'Enter your Email',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email cannot be empty';
+                  }
+                  final regex = RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+                  if (!regex.hasMatch(value)) {
+                    return 'Enter a valid email address';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Password',
+                style: TextStyles.font14BlackMedium,
+              ),
+              SizedBox(height: 8.h),
+              AppTextFormField(
+                controller: context.read<SignupCubit>().signupPassword,
+                hintText: 'Enter your Password',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password cannot be empty';
+                  } else if (value.length < 8) {
+                    return 'Password must be at least 8 characters long';
+                  } else if (!RegExp(r'(?=.*[a-z])').hasMatch(value)) {
+                    return 'Password must contain at least one lowercase letter';
+                  } else if (!RegExp(r'(?=.*[A-Z])').hasMatch(value)) {
+                    return 'Password must contain at least one uppercase letter';
+                  } else if (!RegExp(r'(?=.*\d)').hasMatch(value)) {
+                    return 'Password must contain at least one number';
+                  } else if (!RegExp(r'(?=.*[@$!%*?&])').hasMatch(value)) {
+                    return 'Password must contain at least one special character';
+                  }
+                  return null;
+                },
+                isObscureText: isObsecureText,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isObsecureText = !isObsecureText;
+                    });
+                  },
+                  child: isObsecureText
+                      ? Icon(Icons.visibility_off)
+                      : Icon(Icons.visibility),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Confirm Password',
+                style: TextStyles.font14BlackMedium,
+              ),
+              SizedBox(height: 8.h),
+              AppTextFormField(
+                controller: context.read<SignupCubit>().signupConfirmPassword,
+                hintText: 'Confirm your Password',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password cannot be empty';
+                  } else if (value != context.read<SignupCubit>().signupPassword.text) {
+                    return 'Passwords do not match';
+                  }
+                  return null;
+                },
+                isObscureText: isObsecureText2,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isObsecureText2 = !isObsecureText2;
+                    });
+                  },
+                  child: isObsecureText2
+                      ? Icon(Icons.visibility_off)
+                      : Icon(Icons.visibility),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Phone',
+                style: TextStyles.font14BlackMedium,
+              ),
+              SizedBox(height: 8.h),
+              AppTextFormField(
+                textInputType: TextInputType.phone,
+                hintText: 'Enter Your Phone',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Phone cannot be empty';
+                  }
+                  return null;
+                },
+                controller: context.read<SignupCubit>().signupPhone,
+              ),
+              SizedBox(height: 32.h),
+              state is SignUpLoading
+                  ? Center(child: CircularProgressIndicator(color: ColorsManager.Black))
+                  : AppTextButton(
+                buttonText: 'Create Account',
+                textStyle: TextStyles.font12WhiteBold,
+                onPressed: () {
+                  if (context.read<SignupCubit>().signupFormKey.currentState!.validate()) {
+                    context.read<SignupCubit>().signUp();
+                  }
+                },
+              ),
+              SizedBox(height: 30.h)
+            ],
           ),
-          SizedBox(
-            height: 8.h,
-          ),
-          AppTextFormField(hintText: 'Enter Your Full Name', validator: (p0) {
-
-          },
-          controller: context.read<SignupCubit>().signupName,),
-          SizedBox(height: 16.h,),
-          Text(
-            'Email',
-            style: TextStyles.font14BlackMedium,
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
-          AppTextFormField(
-            controller: context.read<SignupCubit>().signupEmail,
-            hintText: 'Enter your Email',
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Email cannot be empty';
-              }
-              const pattern =
-                  r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
-              final regex = RegExp(pattern);
-              return !regex.hasMatch(value)
-                  ? 'Enter a valid email address'
-                  : null;
-            },
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          Text(
-            'Password',
-            style: TextStyles.font14BlackMedium,
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
-          AppTextFormField(
-            controller: context.read<SignupCubit>().signupPassword,
-            hintText: 'Enter your Password',
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Password cannot be empty';
-              } else if (value.length < 8) {
-                return 'Password must be at least 8 characters long';
-              } else if (!RegExp(r'(?=.*[a-z])').hasMatch(value)) {
-                return 'Password must contain at least one lowercase letter';
-              } else if (!RegExp(r'(?=.*[A-Z])').hasMatch(value)) {
-                return 'Password must contain at least one uppercase letter';
-              } else if (!RegExp(r'(?=.*\d)').hasMatch(value)) {
-                return 'Password must contain at least one number';
-              } else if (!RegExp(r'(?=.*[@$!%*?&])').hasMatch(value)) {
-                return 'Password must contain at least one special character';
-              }
-              return null;
-            },
-            isObscureText: isObsecureText,
-            suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {
-                  isObsecureText = !isObsecureText;
-                });
-              },
-              child: isObsecureText
-                  ? Icon(Icons.visibility_off)
-                  : Icon(Icons.visibility),
-            ),
-          ),
-          Text(
-            'Phone',
-            style: TextStyles.font14BlackMedium,
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
-          AppTextFormField(textInputType: TextInputType.phone,hintText: 'Enter Your Phone', validator: (p0) {
-
-          },
-            controller: context.read<SignupCubit>().signupPhone,),
-          SizedBox(
-            height: 32.h,
-          ),
-          state is SignUpLoading
-              ? Center(child: CircularProgressIndicator(color: ColorsManager.Black,))
-              : AppTextButton(
-            buttonText: 'Create Account',
-            textStyle: TextStyles.font12WhiteBold,
-            onPressed: () {
-              
-              context.read<SignupCubit>().signUp();
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
-  },
-);
+
   }
 }

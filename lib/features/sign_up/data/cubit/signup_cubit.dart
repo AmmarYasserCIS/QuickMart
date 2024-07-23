@@ -13,33 +13,32 @@ class SignupCubit extends Cubit<SignupState> {
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   TextEditingController signupEmail = TextEditingController();
   TextEditingController signupPassword = TextEditingController();
+  TextEditingController signupConfirmPassword = TextEditingController();
   TextEditingController signupName = TextEditingController();
   TextEditingController signupPhone = TextEditingController();
 
   Future<void> signUp() async {
-
     try {
       emit(SignUpLoading());
       final response = await api.post(EndPoint.signUp, data: {
         ApiKey.email: signupEmail.text,
-        ApiKey.password:signupPassword.text,
-        ApiKey.name:signupName.text,
-        ApiKey.phone:signupPhone.text
+        ApiKey.password: signupPassword.text,
+        ApiKey.confirmpassword: signupConfirmPassword.text,
+        ApiKey.name: signupName.text,
+        ApiKey.phone: signupPhone.text
+      }, isFromData: false);
 
-
-      },isFromData: true);
-      if (response.data['status'] == true) {
+      if (response.statusCode == 201) {
         emit(SignUpSuccess());
+      } else if (response.statusCode == 400) {
+        final errorMessage = response.data['errors']?['msg'] ?? 'Unknown error occurred';
+        emit(SignUpFalure(errorMessage: errorMessage));
       }
-      else {
-        emit(SignUpFalure(errorMessage: response.data['message'] ?? 'Unknown error occurred'));
-      }
-      return response;
-    }  on DioException catch (e) {
-      emit(SignUpFalure(errorMessage: e.response?.data['message'] ?? e.toString()));
+    } on DioException catch (e) {
+      final errorMessage = e.response?.data['errors']?['msg'] ?? e.toString();
+      emit(SignUpFalure(errorMessage: errorMessage));
     } catch (e) {
       emit(SignUpFalure(errorMessage: e.toString()));
     }
-    }
   }
-
+}
