@@ -1,16 +1,40 @@
-# quickmart
+# QuickMart
 
-A new Flutter project.
+QuickMart is an e-commerce application designed to provide a seamless shopping experience. With a range of features from authentication to order history, QuickMart aims to simplify online shopping.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- 🔐 **Authentication**: 
+  - Login
+  - Create user
+  - Change password
+  
+- 🔍 **Product Discovery**: 
+  - Explore products by categories
 
-A few resources to get you started if this is your first Flutter project:
+- 🛒 **Cart Management**: 
+  - Add items
+  - Delete items
+  - Change item quantity
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 📦 **Checkout**: 
+  - Complete your order with address, phone number, and other details
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ❤️ **Wishlist**: 
+  - Add items to wishlist
+  - Delete items from wishlist
+
+- 📜 **Order History**: 
+  - Keep track of your past purchases
+
+## Technologies Used
+
+- **State Management**: Cubit
+- **Networking**: Dio
+- **Architecture Pattern**: MVC (Model-View-Controller)
+- **Storage**: Shared Preferences
+- **External Links**: URL Launcher
+
+
+**Check it out** [Video]([https://github.com/AmmarYasserCIS/QuickMart](https://www.linkedin.com/posts/ammar-yasser-334067313_flutter-dart-ecommerce-activity-7221815592561827840-67EZ?utm_source=share&utm_medium=member_android))
+
