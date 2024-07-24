@@ -16,7 +16,7 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Checkout"),centerTitle: true,),
+    return Scaffold(appBar: AppBar(title: Text("Checkout"),centerTitle: true,forceMaterialTransparency: true,),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(

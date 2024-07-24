@@ -27,7 +27,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.categoryName}'),
+        title: Text('${widget.categoryName}'),forceMaterialTransparency: true,
       ),
       body: SingleChildScrollView(
         child: Center(

@@ -9,7 +9,7 @@ class WebViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('WebView')),
+      appBar: AppBar(title: Text('WebView'),forceMaterialTransparency: true,),
       body: WebView(
         initialUrl: url,
         javascriptMode: JavascriptMode.unrestricted,

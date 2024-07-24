@@ -45,6 +45,7 @@ class _DetailedProductState extends State<DetailedProduct> {
             expandedHeight: 290.h,
             floating: false,
             pinned: true,
+            backgroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
                 widget.images[_selectedImageIndex], // Show selected image

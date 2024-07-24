@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickmart/core/theming/Styles.dart';
 import 'package:quickmart/core/widgets/app_circular_indecator.dart';
 import 'package:quickmart/core/widgets/app_text_button.dart';
+import 'package:quickmart/features/cart/ui/widgets/cart_shimmer_builder.dart';
 import 'package:quickmart/features/wishlist/data/cubti/wishlist_cubit.dart';
 import 'package:quickmart/features/wishlist/ui/widgets/wishlist_products.dart';
 
@@ -18,10 +19,15 @@ class WishlistScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is WishlistLoading) {
-          return Center(child: Loading());
+          return Scaffold(
+            appBar: AppBar(automaticallyImplyLeading: false,forceMaterialTransparency: true,title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {
+              context.read<WishlistCubit>().getWishlistData();
+            },icon: Icon(Icons.refresh)),SizedBox(width: 10.w,)]),
+            body:CartShimmerBuilder(),
+          );;
         } else if (state is WishlistFailure) {
           return Scaffold(
-            appBar: AppBar(title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {
+            appBar: AppBar(automaticallyImplyLeading: false,forceMaterialTransparency: true,title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {
               context.read<WishlistCubit>().getWishlistData();
             },icon: Icon(Icons.refresh)),SizedBox(width: 10.w,)]),
             body: Center(child: Text('Failed to load products')),
@@ -29,7 +35,7 @@ class WishlistScreen extends StatelessWidget {
         } else if (state is WishlistSuccess) {
           final products = state.wishlist.data;
           return Scaffold(
-              appBar: AppBar(title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {
+              appBar: AppBar(automaticallyImplyLeading: false,title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {
                 context.read<WishlistCubit>().getWishlistData();
               },icon: Icon(Icons.refresh)),SizedBox(width: 10.w,)]),
               body: Center(
@@ -53,7 +59,7 @@ class WishlistScreen extends StatelessWidget {
               ));
         }
          else {
-          return Scaffold( appBar: AppBar(title: Text('Wishlist'), centerTitle: true,actions: [IconButton(onPressed: () {
+          return Scaffold( appBar: AppBar(automaticallyImplyLeading: false,title: Text('Wishlist'), forceMaterialTransparency: true,centerTitle: true,actions: [IconButton(onPressed: () {
             context.read<WishlistCubit>().getWishlistData();
           },icon: Icon(Icons.refresh)),SizedBox(width: 10.w,)]),
               body: Center(child: Text('No products available')));

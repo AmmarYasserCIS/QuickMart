@@ -6,6 +6,7 @@ import 'package:quickmart/core/widgets/products_builder.dart';
 import 'package:quickmart/features/Product/ui/product.dart';
 import 'package:quickmart/features/home/Data/Cubit/home_cubit.dart';
 import 'package:quickmart/features/home/ui/widgets/ProductsCard.dart';
+import 'package:quickmart/features/home/ui/widgets/home_products_shimmer.dart';
 
 class Products extends StatefulWidget {
   const Products({super.key});
@@ -27,7 +28,20 @@ class _ProductsState extends State<Products> {
       },
       builder: (context, state) {
         if (state is HomeLoading) {
-          return Center(child: Loading());
+          return Center(child: GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.75,
+              crossAxisSpacing: 16.w,
+              mainAxisSpacing: 16.h,
+            ),
+            itemCount: 6,
+            itemBuilder: (context, index) {
+              return ProductShimmer();
+            },
+          ),);
         } else if (state is HomeFaliure) {
           return Center(child: Text('Failed to load products'));
         } else if (state is HomeSuccess) {

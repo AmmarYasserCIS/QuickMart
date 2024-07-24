@@ -9,6 +9,7 @@ import 'package:quickmart/core/widgets/app_circular_indecator.dart';
 import 'package:quickmart/features/category_products/data/cubit/category_products_cubit.dart';
 import 'package:quickmart/features/category_products/ui/category_Products.dart';
 import 'package:quickmart/features/home/Data/Cubit/categories_cubit.dart';
+import 'package:quickmart/features/home/ui/widgets/shimmer_category_widget.dart';
 
 class CategoriesBuilder extends StatelessWidget {
   const CategoriesBuilder({super.key});
@@ -26,7 +27,7 @@ class CategoriesBuilder extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is CategoriesLoading) {
-          return Center(child: Loading());
+          return Center(child: ShimmerCategoryWidget());
         } else if (state is CategoriesSuccess) {
           final categories = state.categories.data;
 
