@@ -36,5 +36,5 @@ QuickMart is an e-commerce application designed to provide a seamless shopping e
 - **External Links**: URL Launcher
 
 
-**Check it out** [Video]([https://github.com/AmmarYasserCIS/QuickMart](https://www.linkedin.com/posts/ammar-yasser-334067313_flutter-dart-ecommerce-activity-7221815592561827840-67EZ?utm_source=share&utm_medium=member_android))
+**Check it out** [Video](https://www.linkedin.com/posts/ammar-yasser-334067313_flutter-dart-ecommerce-activity-7221815592561827840-67EZ?utm_source=share&utm_medium=member_android)
 
